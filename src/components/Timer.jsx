@@ -56,12 +56,14 @@ export const Timer = () => {
 					value={seconds}
 				/>
 			</div>
-			{isCounting ? (
-				<button onClick={pause}>Pause</button>
-			) : (
-				<button onClick={start}>Start</button>
-			)}
-			<button onClick={reset}>Reset</button>
+			<div className="buttons">
+				{isCounting ? (
+					<button onClick={pause}>Pause</button> 
+				) : (
+					<button onClick={start}>Start</button>
+				)}
+				{isCounting && <button onClick={reset}>Reset</button>}
+			</div>
 		</div>
 	);
 };
