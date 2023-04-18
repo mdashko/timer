@@ -6,6 +6,7 @@ export const Timer = () => {
 	const [secondsInput, setSecondsInput] = useState(0);
 	const [timeLeft, setTimeLeft] = useState(0);
 	const [isCounting, setIsCounting] = useState(false);
+	const [isEnable, setIsEnable] = useState(true);
 
 	const minutes = getPadTime(Math.floor(timeLeft / 60));
 	const seconds = getPadTime(Math.floor(timeLeft - minutes * 60));
@@ -26,27 +27,34 @@ export const Timer = () => {
 
 	const start = () => {
 		setIsCounting(true);
+		setIsEnable(false);
 	};
 
 	const pause = () => {
 		setIsCounting(false);
+		setIsEnable(false);
 	};
 
 	const reset = () => {
 		setIsCounting(false);
+		setIsEnable(true);
 		setTimeLeft(0);
 	};
 
 	return (
 		<div>
-			<h1>
-				{minutes}:{seconds}
-			</h1>
-			<div>
-				<p>minutes:</p>
-				<input onChange={(event) => setMinutesInput(+event.target.value)} />
-				<p>seconds:</p>
-				<input onChange={(event) => setSecondsInput(+event.target.value)} />
+			<div className="container">
+				<input
+					disabled={!isEnable}
+					onChange={(event) => setMinutesInput(+event.target.value)}
+					value={minutes}
+				/>
+				<h2>:</h2>
+				<input
+					disabled={!isEnable}
+					onChange={(event) => setSecondsInput(+event.target.value)}
+					value={seconds}
+				/>
 			</div>
 			{isCounting ? (
 				<button onClick={pause}>Pause</button>
